@@ -1,0 +1,130 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[margin=0.6in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tgheros}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\tolerance=1000
+\raggedright
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagenumbering{gobble}
+
+\titlespacing*{\section}{0pt}{7pt}{3pt}
+\titleformat{\section}
+  {\normalfont\bfseries\fontsize{10.5}{12.5}\selectfont\uppercase}
+  {}{0pt}{}
+  [{\vspace{0.5pt}\titlerule[0.5pt]}]
+
+\setlist[itemize]{leftmargin=0.17in,label=\textbullet,itemsep=1.2pt,topsep=1.2pt,parsep=0pt,nosep}
+
+\newcommand{\resumeitem}[1]{\item #1}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=black}
+
+% Dark navy for header
+\definecolor{navy}{RGB}{22,39,68}
+
+\begin{document}
+
+% ===================== HEADER =====================
+{\centering
+{\fontsize{22}{24}\selectfont\textbf{\color{navy}\MakeUppercase{NANDHANA K S}}}\par
+\vspace{2.5pt}
+{\fontsize{11}{12.5}\selectfont\textbf{\color{navy}Cybersecurity Researcher | Offensive \& Defensive Security}}\par
+\vspace{4pt}
+{\fontsize{8.5}{10}\selectfont
+Thrissur, Kerala, India \quad\textbar\quad +91 9072221640 \quad\textbar\quad \href{mailto:nandhanaks321@gmail.com}{nandhanaks321@gmail.com}\par
+\vspace{1.5pt}
+\href{https://linkedin.com/in/nandhana-k-s}{linkedin.com/in/nandhana-k-s} \quad\textbar\quad
+\href{https://github.com/nandhanaks2004}{github.com/nandhanaks2004} \quad\textbar\quad
+\href{https://nandhanaks2004.github.io/portfolio}{nandhanaks2004.github.io/portfolio}\par}
+\vspace{5pt}
+{\color{navy}\noindent\rule{\textwidth}{0.6pt}}
+\par}
+\vspace{5pt}
+
+\vspace{5pt}
+
+% ===================== SUMMARY =====================
+\section{Professional Summary}
+{\fontsize{9}{11}\selectfont
+Cybersecurity researcher with hands-on experience across offensive and defensive security, specializing in Web and API Security, Active Directory Security, Android Application Pentesting, VAPT, and SOC operations. Microsoft SC-900 certified with practical exposure to SIEM, threat intelligence, Python, and security automation. Continuously expanding expertise in AI-driven security, security automation, and cloud security while applying hands-on knowledge across offensive and defensive security domains.}
+
+% ===================== SKILLS =====================
+\section{Technical Skills}
+{\fontsize{8.5}{10}\selectfont
+\textbf{Security:} Web Security, API Security, Vulnerability Assessment and Penetration Testing (VAPT), Active Directory Security, Android Pentesting, Network Security\par
+\textbf{SOC \& Monitoring:} Security Information and Event Management (SIEM), Threat Intelligence, Incident Response, Wazuh, Splunk\par
+\textbf{Security Tools:} Burp Suite, Nmap, Wireshark, Metasploit, Nessus, SQLmap, MobSF, Frida\par
+\textbf{Programming \& Automation:} Python, Flask, FastAPI, REST APIs, Git, Docker\par
+\textbf{Cloud \& Identity:} Microsoft Entra ID, Identity and Access Management (IAM), Microsoft Defender, Azure Fundamentals\par
+}
+
+% ===================== EXPERIENCE =====================
+\section{Professional Experience}
+
+\noindent\textbf{Cybersecurity Researcher \& Trainer} \hfill \textbf{Sep 2025 -- Present}\\
+\noindent{\fontsize{8.5}{10}\selectfont Offenso Hackers Academy, Calicut, Kerala}
+\begin{itemize}
+\resumeitem{Conduct hands-on cybersecurity research and testing across Web and API Security, Active Directory, Android Security, Vulnerability Assessment, and SOC operations, translating concepts into practical attack-and-defense scenarios.}
+\resumeitem{Designed and built 50+ practical security labs, CTF challenges, attack-defense scenarios, and interactive simulations covering offensive and defensive security concepts.}
+\resumeitem{Prototype AI-assisted cybersecurity approaches and Python-based automation workflows to simplify repetitive security tasks and support security education.}
+\resumeitem{Apply real-world attack scenarios, technical demonstrations, and hands-on exercises to translate offensive and defensive security concepts into practical learning environments.}
+\end{itemize}
+
+\vspace{2pt}
+\noindent\textbf{Cybersecurity Intern} \hfill \textbf{Jan 2025}\\
+\noindent{\fontsize{8.5}{10}\selectfont Kerala Police Academy, Kerala \hfill 15-Day Internship}
+\begin{itemize}
+\resumeitem{Performed static and dynamic malware analysis using sandbox techniques to examine malware behavior and identify indicators of compromise (IOCs).}
+\resumeitem{Completed a practical project, \textit{Malware Analysis Using Sandbox Technology}, applying sandbox analysis to investigate malware execution and behavioral characteristics.}
+\end{itemize}
+
+% ===================== PROJECTS =====================
+\section{Selected Projects}
+
+\noindent\textbf{Threat Intelligence Aggregator} \hfill {\fontsize{8.5}{10}\selectfont\textit{Python \textbar{} VirusTotal \textbar{} AbuseIPDB \textbar{} Shodan}}\\
+\begin{itemize}
+\resumeitem{Automated IOC enrichment by integrating multiple threat intelligence sources including VirusTotal, AbuseIPDB, and Shodan to support threat analysis and security operations.}
+\end{itemize}
+
+\vspace{2pt}
+\noindent\textbf{OWASP Top 10 Interactive Security Lab} \hfill {\fontsize{8.5}{10}\selectfont\textit{Web Security \textbar{} OWASP}}\\
+\begin{itemize}
+\resumeitem{Built a controlled hands-on environment for testing SQL Injection, Cross-Site Scripting (XSS), authentication weaknesses, and common web application vulnerabilities.}
+\end{itemize}
+
+\vspace{2pt}
+\noindent\textbf{MODUS -- Cybersecurity Learning Platform} \hfill {\fontsize{8.5}{10}\selectfont\textit{Flask \textbar{} React \textbar{} CTF \textbar{} Linux}}\\
+\begin{itemize}
+\resumeitem{Created an interactive cybersecurity learning platform integrating practical security labs, CTF challenges, Linux exercises, assessments, gamification, and analytics.}
+\end{itemize}
+
+% ===================== EDUCATION =====================
+\section{Education}
+
+\noindent\textbf{Master of Computer Applications (MCA)} \hfill \textbf{Pursuing}\\
+\noindent{\fontsize{8.5}{10}\selectfont Indira Gandhi National Open University (IGNOU)}\\[2pt]
+
+\noindent\textbf{B.Sc. Digital \& Cyber Forensic Science} \hfill \textbf{2025}\\
+\noindent{\fontsize{8.5}{10}\selectfont Bharathiar University \hfill CGPA: 8.3/10}
+
+% ===================== CERTIFICATIONS =====================
+\section{Certifications}
+\begin{itemize}
+\resumeitem{Microsoft Certified: Security, Compliance, and Identity Fundamentals (SC-900)}
+\resumeitem{Palo Alto Networks: Security Operations Fundamentals}
+\resumeitem{EC-Council: Ethical Hacking Essentials (EHE), Network Defense Essentials (NDE), Digital Forensics Essentials (DFE)}
+\end{itemize}
+
+\end{document}
