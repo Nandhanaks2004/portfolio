@@ -94,6 +94,19 @@
     grid-template-columns: 1fr;
     gap: 12px;
   }
+  .magic-bento-card {
+    padding: 1.15rem;
+    border-radius: 14px;
+    min-height: auto;
+  }
+  .magic-bento-card__title {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .magic-bento-card__description {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
 }
 
 @media (min-width: 640px) and (max-width: 1023px) {

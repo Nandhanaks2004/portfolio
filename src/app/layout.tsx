@@ -12,6 +12,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
   title: "Nandhana K S | Cybersecurity Researcher & Specialist",
   description: "Portfolio of Nandhana K S — Offensive and Defensive Cybersecurity Researcher, SOC Operations & Digital Forensics Specialist.",

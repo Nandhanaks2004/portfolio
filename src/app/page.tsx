@@ -372,7 +372,7 @@ export default function Portfolio() {
     : certificationsData.filter(cert => cert.group === certFilter);
 
   return (
-    <div className="bg-[#050507] text-white font-sans h-screen w-screen overflow-hidden relative selection:bg-white/20 selection:text-white">
+    <div className="bg-[#050507] text-white font-sans h-[100dvh] w-screen overflow-hidden relative selection:bg-white/20 selection:text-white">
       <style>{`
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(30px); filter: blur(4px); }
@@ -433,13 +433,13 @@ export default function Portfolio() {
         />
       </div>
 
-      {/* Top Navbar (Clean Typography Without Pill Outlines) */}
+      {/* Top Navbar (Mobile Horizontal Scrolling + Desktop Luxury Spacing) */}
       {!isLoading && (
         <nav 
-          className="absolute top-8 left-1/2 -translate-x-1/2 z-40 px-6 md:px-8 py-3 rounded-full backdrop-blur-xl bg-white/[0.04] border border-white/10 shadow-2xl opacity-0 animate-fade-in-down" 
+          className="fixed top-3 sm:top-6 md:top-8 left-1/2 -translate-x-1/2 z-40 max-w-[96vw] sm:max-w-none px-2.5 sm:px-6 md:px-8 py-1.5 sm:py-2.5 md:py-3 rounded-full backdrop-blur-xl bg-white/[0.05] border border-white/10 shadow-2xl opacity-0 animate-fade-in-down" 
           style={{ animationDelay: '2.5s' }}
         >
-          <ul className="flex items-center gap-4 md:gap-8 text-[10px] md:text-xs font-display tracking-[0.2em] text-slate-400 uppercase">
+          <ul className="flex items-center gap-1 sm:gap-4 md:gap-8 text-[9px] sm:text-[11px] md:text-xs font-display tracking-[0.12em] sm:tracking-[0.2em] text-slate-400 uppercase overflow-x-auto no-scrollbar whitespace-nowrap px-1">
             {[
               { id: 'hero', label: 'Home' },
               { id: 'about', label: 'About' },
@@ -448,13 +448,13 @@ export default function Portfolio() {
               { id: 'experience', label: 'Experience' },
               { id: 'certifications', label: 'Certifications' }
             ].map(({ id, label }) => (
-              <li key={id}>
+              <li key={id} className="flex-shrink-0">
                 <button
                   onClick={() => handleNavClick(id)}
-                  className={`transition-colors duration-300 py-1 ${
+                  className={`transition-all duration-300 px-2 sm:px-2.5 py-1 rounded-full ${
                     activeSection === id 
-                      ? 'text-white font-bold tracking-wider' 
-                      : 'text-slate-400 hover:text-white'
+                      ? 'text-white font-bold bg-white/10 shadow-[0_0_12px_rgba(255,255,255,0.15)]' 
+                      : 'text-slate-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   {label}
@@ -467,13 +467,13 @@ export default function Portfolio() {
 
       {/* Floating Toast Notification on Email Copy */}
       {copiedEmail && (
-        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-[100] px-5 py-2.5 rounded-full bg-[#050508]/95 border border-emerald-500/40 text-emerald-300 text-xs font-mono shadow-[0_10px_35px_rgba(0,0,0,0.85)] backdrop-blur-xl flex items-center gap-2.5 animate-[fadeIn_0.2s_ease-out]">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          <span>Email copied: nandhanaks321@gmail.com</span>
+        <div className="fixed top-16 md:top-24 left-1/2 -translate-x-1/2 z-[100] max-w-[90vw] px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#050508]/95 border border-emerald-500/40 text-emerald-300 text-[11px] sm:text-xs font-mono shadow-[0_10px_35px_rgba(0,0,0,0.85)] backdrop-blur-xl flex items-center gap-2.5 animate-[fadeIn_0.2s_ease-out]">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping flex-shrink-0"></span>
+          <span className="truncate">Email copied: nandhanaks321@gmail.com</span>
         </div>
       )}
 
-      {/* Vertical Social Links (Far Left Rail) */}
+      {/* Vertical Social Links (Far Left Rail - Desktop) */}
       {!isLoading && (
         <div className="hidden md:flex flex-col items-center gap-5 absolute left-6 lg:left-8 top-1/2 -translate-y-1/2 z-40">
           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent to-white/20 mb-1"></div>
@@ -484,30 +484,30 @@ export default function Portfolio() {
         </div>
       )}
 
-      {/* MAIN CONTENT VIEWPORT */}
-      <div className={`relative z-10 w-full h-full max-w-[1400px] mx-auto px-6 lg:px-20 flex items-center justify-center fade-transition ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
+      {/* MAIN CONTENT VIEWPORT (Scrollable on Mobile, Centered on Desktop) */}
+      <div className={`relative z-10 w-full h-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-20 overflow-y-auto no-scrollbar flex flex-col items-center justify-start md:justify-center fade-transition ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
         
         {/* HERO SECTION */}
         {activeSection === 'hero' && !isLoading && (
-          <div className="flex flex-col text-left max-w-3xl w-full">
+          <div className="flex flex-col text-left max-w-3xl w-full min-h-[calc(100dvh-5rem)] md:min-h-0 justify-center py-16 md:py-0">
             {/* Live Status Pill */}
-            <div className="mb-6 opacity-0 animate-fade-in-down" style={{ animationDelay: '0.4s' }}>
-              <div className="inline-flex items-center gap-2.5 backdrop-blur-md bg-white/[0.04] border border-white/10 rounded-full px-5 py-2 text-xs font-semibold tracking-[0.2em] text-white uppercase shadow-lg">
-                <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                <span>Cybersecurity Researcher & Specialist</span>
+            <div className="mb-4 sm:mb-6 opacity-0 animate-fade-in-down" style={{ animationDelay: '0.4s' }}>
+              <div className="inline-flex items-center gap-2 sm:gap-2.5 backdrop-blur-md bg-white/[0.04] border border-white/10 rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] text-white uppercase shadow-lg">
+                <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-white animate-pulse"></span>
+                <span className="truncate">Cybersecurity Researcher & Specialist</span>
               </div>
             </div>
             
             {/* Hi, I'm Nandhana K S with High-Gloss Shiny Text */}
-            <div className="mb-2 opacity-0 animate-fade-in-down" style={{ animationDelay: '0.8s' }}>
-              <span className="font-display text-xl md:text-3xl text-slate-400 font-light tracking-wide">
+            <div className="mb-1 sm:mb-2 opacity-0 animate-fade-in-down" style={{ animationDelay: '0.8s' }}>
+              <span className="font-display text-lg sm:text-2xl md:text-3xl text-slate-400 font-light tracking-wide">
                 Hi, I'm
               </span>
             </div>
-            <div className="mb-6 opacity-0 animate-fade-in-down flex" style={{ animationDelay: '1.2s' }}>
+            <div className="mb-4 sm:mb-6 opacity-0 animate-fade-in-down flex" style={{ animationDelay: '1.2s' }}>
               <ShinyText
                 text="Nandhana K S"
-                className="text-[clamp(3.4rem,7.5vw,5.8rem)] font-black text-white leading-none tracking-tight font-display"
+                className="text-[clamp(2.3rem,7.5vw,5.8rem)] font-black text-white leading-tight sm:leading-none tracking-tight font-display"
                 color="#94a3b8"
                 shineColor="#ffffff"
                 speed={2.5}
@@ -516,7 +516,7 @@ export default function Portfolio() {
             </div>
 
             {/* Sub-headline in High-Gloss Shiny White */}
-            <h2 className="font-display font-medium text-xl md:text-2xl lg:text-3xl leading-snug mb-6 tracking-wide opacity-0 animate-fade-in-down" style={{ animationDelay: '1.8s' }}>
+            <h2 className="font-display font-medium text-base sm:text-xl md:text-2xl lg:text-3xl leading-snug mb-4 sm:mb-6 tracking-wide opacity-0 animate-fade-in-down" style={{ animationDelay: '1.8s' }}>
               <ShinyText
                 text="Penetration Testing, SOC Operations & Digital Forensics"
                 className="text-white font-medium"
@@ -528,12 +528,12 @@ export default function Portfolio() {
             </h2>
             
             {/* Bio statement */}
-            <p className="font-sans text-slate-300 text-sm md:text-base max-w-2xl font-normal leading-relaxed mb-10 tracking-wide opacity-0 animate-fade-in-down" style={{ animationDelay: '2.4s' }}>
+            <p className="font-sans text-slate-300 text-xs sm:text-sm md:text-base max-w-2xl font-normal leading-relaxed mb-6 sm:mb-10 tracking-wide opacity-0 animate-fade-in-down" style={{ animationDelay: '2.4s' }}>
               Investigating attack vectors, executing offensive simulations, triaging telemetry, and engineering end-to-end incident response workflows. Fusing adversary emulation with disciplined blue-team defense.
             </p>
 
             {/* Specular Action Buttons */}
-            <div className="flex items-center gap-5 opacity-0 animate-fade-in-down" style={{ animationDelay: '3.0s' }}>
+            <div className="flex flex-wrap items-center gap-3 sm:gap-5 opacity-0 animate-fade-in-down" style={{ animationDelay: '3.0s' }}>
               <SpecularButton
                 onClick={() => handleNavClick('projects')}
                 size="md"
@@ -561,14 +561,22 @@ export default function Portfolio() {
                 Resume <ArrowUpRight size={16} />
               </SpecularButton>
             </div>
+
+            {/* Mobile Social Rail (Visible on mobile screens) */}
+            <div className="flex md:hidden items-center gap-3 mt-6 pt-5 border-t border-white/10 opacity-0 animate-fade-in-down" style={{ animationDelay: '3.2s' }}>
+              <span className="text-[10px] font-mono tracking-widest uppercase text-slate-400 mr-1">Connect:</span>
+              <a href="https://linkedin.com/in/nandhana-k-s-49b79827b" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all shadow-md" title="LinkedIn Profile"><FaLinkedin size={16} /></a>
+              <a href="https://github.com/Nandhanaks2004" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all shadow-md" title="GitHub Profile"><FaGithub size={16} /></a>
+              <button onClick={handleMailClick} className="p-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all shadow-md cursor-pointer" title="Email: nandhanaks321@gmail.com (Click to open / copy)"><Mail size={16} /></button>
+            </div>
           </div>
         )}
 
         {/* ABOUT SECTION */}
         {activeSection === 'about' && (
-          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center animate-zoom-in">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center animate-zoom-in min-h-full py-20 md:py-0">
             {/* Left Column: Interactive 3D Sphere */}
-            <div className="relative w-full h-[380px] lg:h-[480px] flex justify-center items-center">
+            <div className="relative w-full h-[230px] sm:h-[320px] lg:h-[480px] flex justify-center items-center">
               <div className="absolute inset-0 z-10 opacity-80">
                 <CrystalizedBall
                   preset="abyss"
@@ -582,8 +590,8 @@ export default function Portfolio() {
             </div>
             
             {/* Right Column: Narrative with Shiny Text */}
-            <div className="flex flex-col text-left justify-center z-20">
-              <div className="mb-3">
+            <div className="flex flex-col text-left justify-center z-20 pb-8 lg:pb-0">
+              <div className="mb-2 sm:mb-3">
                 <ShinyText
                   text="ABOUT ME"
                   className="font-display text-xs md:text-sm tracking-[0.3em] uppercase text-white font-bold"
@@ -593,10 +601,10 @@ export default function Portfolio() {
                   trigger="loop"
                 />
               </div>
-              <h4 className="font-display font-bold text-xs md:text-sm text-slate-300 tracking-[0.25em] uppercase mb-5">
+              <h4 className="font-display font-bold text-[11px] sm:text-xs md:text-sm text-slate-300 tracking-[0.2em] sm:tracking-[0.25em] uppercase mb-3 sm:mb-5">
                 Microsoft SC-900 Certified Specialist
               </h4>
-              <h2 className="font-display font-bold text-2xl lg:text-3xl leading-tight mb-5">
+              <h2 className="font-display font-bold text-xl sm:text-2xl lg:text-3xl leading-snug mb-3 sm:mb-5">
                 <ShinyText
                   text="I am a Cybersecurity Professional specializing in offensive and defensive security operations."
                   className="text-white font-bold"
@@ -606,11 +614,11 @@ export default function Portfolio() {
                   trigger="loop"
                 />
               </h2>
-              <p className="font-sans font-normal text-sm md:text-base text-slate-300 leading-relaxed max-w-xl mb-6">
+              <p className="font-sans font-normal text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed max-w-xl mb-5 sm:mb-6">
                 Fusing deep offensive knowledge—thinking like an adversary—with disciplined defensive strategy to safeguard digital frontiers. From digital forensics to real-time SOC investigations and interactive security research.
               </p>
               <div>
-                <span className="backdrop-blur-md bg-white/[0.04] border border-white/10 rounded-full px-5 py-2 text-xs font-semibold tracking-widest uppercase inline-block text-white">
+                <span className="backdrop-blur-md bg-white/[0.04] border border-white/10 rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider sm:tracking-widest uppercase inline-block text-white leading-relaxed">
                   Currently: Cybersecurity Researcher & Trainer at Offenso Hackers Academy
                 </span>
               </div>
@@ -620,18 +628,23 @@ export default function Portfolio() {
 
         {/* SKILLS SECTION: Single Tap-to-Swap Card with Refined Compact Spacing */}
         {activeSection === 'skills' && (
-          <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center animate-zoom-in min-h-full pt-20 md:pt-24 pb-4">
+          <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center animate-zoom-in min-h-full pt-20 sm:pt-24 pb-6">
             {/* Clean Section Title with Shiny Text */}
-            <div className="text-center mb-4 md:mb-5">
+            <div className="text-center mb-2 sm:mb-3">
               <ShinyText
                 text="WHAT I OFFER"
-                className="font-display text-base md:text-lg tracking-[0.35em] uppercase font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.25)]"
+                className="font-display text-sm md:text-lg tracking-[0.35em] uppercase font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.25)]"
                 color="#cbd5e1"
                 shineColor="#ffffff"
                 speed={2.5}
                 trigger="loop"
               />
             </div>
+
+            {/* Mobile Interaction Hint */}
+            <span className="text-[10px] font-mono text-slate-400 tracking-wider text-center block mb-3 sm:mb-4">
+              Tap card to toggle domain perspective (Red Team ↔ Blue Team)
+            </span>
 
             {/* Single Interactive Tap-to-Swap Card with Framer Motion (Tap card to toggle Offensive <-> Defensive) */}
             <div 
@@ -647,58 +660,58 @@ export default function Portfolio() {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.97, y: -8 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="backdrop-blur-xl bg-white/[0.03] border border-white/10 hover:border-white/20 rounded-2xl md:rounded-3xl p-5 md:p-6 shadow-[0_15px_40px_rgba(0,0,0,0.6)] transition-all group"
+                    className="backdrop-blur-xl bg-white/[0.03] border border-white/10 hover:border-white/20 rounded-2xl md:rounded-3xl p-4 sm:p-5 md:p-6 shadow-[0_15px_40px_rgba(0,0,0,0.6)] transition-all group"
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div>
                         <span className="text-[10px] font-mono tracking-widest text-slate-400 uppercase font-medium">Domain Perspective</span>
-                        <h4 className="font-display text-lg md:text-xl font-bold text-white tracking-wide mt-0.5">
+                        <h4 className="font-display text-base sm:text-lg md:text-xl font-bold text-white tracking-wide mt-0.5">
                           Offensive Security
                         </h4>
                       </div>
-                      <div className="flex items-center gap-2.5">
-                        <span className="px-3 py-1 rounded-full text-[10px] font-mono tracking-wider bg-white/10 text-white border border-white/15 uppercase font-medium">
+                      <div className="flex items-center gap-2 sm:gap-2.5">
+                        <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] font-mono tracking-wider bg-white/10 text-white border border-white/15 uppercase font-medium">
                           Red Team
                         </span>
                         <div 
-                          className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 flex items-center justify-center text-slate-300 group-hover:text-white transition-all shadow-md group-hover:rotate-180 duration-500" 
+                          className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 flex items-center justify-center text-slate-300 group-hover:text-white transition-all shadow-md group-hover:rotate-180 duration-500" 
                           title="Click to toggle perspective"
                         >
-                          <ArrowLeftRight size={14} />
+                          <ArrowLeftRight size={13} />
                         </div>
                       </div>
                     </div>
 
-                    <p className="font-sans text-xs text-slate-300 leading-relaxed mb-3.5">
+                    <p className="font-sans text-xs text-slate-300 leading-relaxed mb-3">
                       Proactively uncovering attack surfaces through deep exploitation, privilege escalation, and adversary emulation across web, cloud, and enterprise infrastructure.
                     </p>
 
-                    <ul className="space-y-2 mb-4 text-xs text-slate-200 font-sans">
-                      <li className="flex items-center gap-2.5">
+                    <ul className="space-y-1.5 sm:space-y-2 mb-3.5 text-xs text-slate-200 font-sans">
+                      <li className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-white/70 flex-shrink-0"></span>
                         <span>Web Application & API Penetration Testing (OWASP Top 10, REST/GraphQL)</span>
                       </li>
-                      <li className="flex items-center gap-2.5">
+                      <li className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-white/70 flex-shrink-0"></span>
                         <span>Active Directory Exploitation & Windows Privilege Escalation</span>
                       </li>
-                      <li className="flex items-center gap-2.5">
+                      <li className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-white/70 flex-shrink-0"></span>
                         <span>Android Mobile Application Pentesting (Static & Dynamic APK Audits)</span>
                       </li>
-                      <li className="flex items-center gap-2.5">
+                      <li className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-white/70 flex-shrink-0"></span>
                         <span>Vulnerability Assessment, Threat Modeling & Proof-of-Concept Verification</span>
                       </li>
-                      <li className="flex items-center gap-2.5">
+                      <li className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-white/70 flex-shrink-0"></span>
                         <span>Security Lab Architecture & Custom Exploit Scripting (Python / Bash)</span>
                       </li>
                     </ul>
 
-                    <div className="flex flex-wrap gap-1.5 pt-3.5 border-t border-white/10">
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/10">
                       {["Burp Suite", "Metasploit", "Nmap", "Kali Linux", "Active Directory", "Android Pentest", "Python", "Bash"].map(tag => (
-                        <span key={tag} className="px-2.5 py-1 rounded-lg text-[11px] font-mono tracking-wider bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors">
+                        <span key={tag} className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-[11px] font-mono tracking-wider bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors">
                           {tag}
                         </span>
                       ))}
@@ -711,58 +724,58 @@ export default function Portfolio() {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.97, y: -8 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="backdrop-blur-xl bg-white/[0.03] border border-white/10 hover:border-white/20 rounded-2xl md:rounded-3xl p-5 md:p-6 shadow-[0_15px_40px_rgba(0,0,0,0.6)] transition-all group"
+                    className="backdrop-blur-xl bg-white/[0.03] border border-white/10 hover:border-white/20 rounded-2xl md:rounded-3xl p-4 sm:p-5 md:p-6 shadow-[0_15px_40px_rgba(0,0,0,0.6)] transition-all group"
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div>
                         <span className="text-[10px] font-mono tracking-widest text-slate-400 uppercase font-medium">Domain Perspective</span>
-                        <h4 className="font-display text-lg md:text-xl font-bold text-white tracking-wide mt-0.5">
+                        <h4 className="font-display text-base sm:text-lg md:text-xl font-bold text-white tracking-wide mt-0.5">
                           Defensive Operations
                         </h4>
                       </div>
-                      <div className="flex items-center gap-2.5">
-                        <span className="px-3 py-1 rounded-full text-[10px] font-mono tracking-wider bg-white/10 text-white border border-white/15 uppercase font-medium">
+                      <div className="flex items-center gap-2 sm:gap-2.5">
+                        <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] font-mono tracking-wider bg-white/10 text-white border border-white/15 uppercase font-medium">
                           Blue Team
                         </span>
                         <div 
-                          className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 flex items-center justify-center text-slate-300 group-hover:text-white transition-all shadow-md group-hover:rotate-180 duration-500" 
+                          className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 flex items-center justify-center text-slate-300 group-hover:text-white transition-all shadow-md group-hover:rotate-180 duration-500" 
                           title="Click to toggle perspective"
                         >
-                          <ArrowLeftRight size={14} />
+                          <ArrowLeftRight size={13} />
                         </div>
                       </div>
                     </div>
 
-                    <p className="font-sans text-xs text-slate-300 leading-relaxed mb-3.5">
+                    <p className="font-sans text-xs text-slate-300 leading-relaxed mb-3">
                       Guarding enterprise infrastructure through real-time telemetry analysis, digital forensics, SIEM correlation, and disciplined incident containment.
                     </p>
 
-                    <ul className="space-y-2 mb-4 text-xs text-slate-200 font-sans">
-                      <li className="flex items-center gap-2.5">
+                    <ul className="space-y-1.5 sm:space-y-2 mb-3.5 text-xs text-slate-200 font-sans">
+                      <li className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-white/70 flex-shrink-0"></span>
                         <span>SOC Telemetry Monitoring & SIEM Incident Correlation (Splunk & Wazuh)</span>
                       </li>
-                      <li className="flex items-center gap-2.5">
+                      <li className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-white/70 flex-shrink-0"></span>
                         <span>Real-Time Malware Threat Triage, Static Inspection & IOC Extraction</span>
                       </li>
-                      <li className="flex items-center gap-2.5">
+                      <li className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-white/70 flex-shrink-0"></span>
                         <span>Digital Forensics & Incident Response (DFIR Artifacts, Autopsy & Volatility)</span>
                       </li>
-                      <li className="flex items-center gap-2.5">
+                      <li className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-white/70 flex-shrink-0"></span>
                         <span>Network Traffic Deep Packet Inspection & Anomaly Hunting (Wireshark)</span>
                       </li>
-                      <li className="flex items-center gap-2.5">
+                      <li className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-white/70 flex-shrink-0"></span>
                         <span>Cloud Security Posture, Identity Governance & IAM Compliance (SC-900)</span>
                       </li>
                     </ul>
 
-                    <div className="flex flex-wrap gap-1.5 pt-3.5 border-t border-white/10">
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/10">
                       {["Splunk", "Wazuh", "Wireshark", "Autopsy", "VirusTotal", "SC-900", "Volatility", "Linux/Windows"].map(tag => (
-                        <span key={tag} className="px-2.5 py-1 rounded-lg text-[11px] font-mono tracking-wider bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors">
+                        <span key={tag} className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-[11px] font-mono tracking-wider bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors">
                           {tag}
                         </span>
                       ))}
@@ -773,13 +786,13 @@ export default function Portfolio() {
             </div>
 
             {/* Branded Tool Loop Ticker (Pure White Icons Only, No Names) */}
-            <div className="w-full backdrop-blur-md bg-white/[0.02] border border-white/10 rounded-xl py-3 px-5 shadow-xl">
+            <div className="w-full backdrop-blur-md bg-white/[0.02] border border-white/10 rounded-xl py-2.5 sm:py-3 px-3 sm:px-5 shadow-xl">
               <LogoLoop
                 logos={logos}
-                speed={60}
+                speed={50}
                 direction="left"
-                logoHeight={32}
-                gap={45}
+                logoHeight={26}
+                gap={32}
                 fadeOut={true}
                 fadeOutColor="#050507"
                 scaleOnHover={true}
@@ -790,20 +803,23 @@ export default function Portfolio() {
 
         {/* PROJECTS SECTION */}
         {activeSection === 'projects' && (
-          <div className="w-full flex flex-col items-center justify-center animate-[fadeIn_0.8s_ease-out_forwards] mt-10">
+          <div className="w-full flex flex-col items-center justify-center animate-[fadeIn_0.8s_ease-out_forwards] min-h-full pt-20 md:pt-16 pb-12">
             {/* Clean Section Title with Shiny Text */}
-            <div className="mb-10 text-center">
+            <div className="mb-6 md:mb-10 text-center">
               <ShinyText
                 text="FEATURED ARCHITECTURE"
-                className="font-display text-sm md:text-base tracking-[0.35em] uppercase font-bold text-white"
+                className="font-display text-xs sm:text-sm md:text-base tracking-[0.35em] uppercase font-bold text-white"
                 color="#94a3b8"
                 shineColor="#ffffff"
                 speed={2.5}
                 trigger="loop"
               />
+              <span className="text-[10px] font-mono text-slate-400 tracking-wider block mt-1">
+                Tap any architecture to launch complete case study
+              </span>
             </div>
 
-            <section className="w-full max-w-[1400px] mx-auto px-4">
+            <section className="w-full max-w-[1400px] mx-auto px-1 sm:px-4">
               <AccordionGallery
                 items={projectsData.map(p => ({
                   image: p.image,
@@ -823,12 +839,12 @@ export default function Portfolio() {
 
         {/* EXPERIENCE SECTION: Two-Column Split Layout with Transparent Ambient Background */}
         {activeSection === 'experience' && (
-          <div className="w-full h-full max-w-6xl mx-auto px-6 py-24 md:py-32 overflow-y-auto no-scrollbar">
+          <div className="w-full h-full max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-32 overflow-y-auto no-scrollbar">
             {/* Section Heading in Bold Pure Metallic Shiny Text */}
-            <div className="text-center mb-20 md:mb-24">
+            <div className="text-center mb-12 md:mb-20">
               <ShinyText
                 text="WHERE I'VE WORKED & LEARNED"
-                className="font-display text-2xl md:text-3xl tracking-[0.3em] uppercase font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.25)]"
+                className="font-display text-lg sm:text-2xl md:text-3xl tracking-[0.25em] sm:tracking-[0.3em] uppercase font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.25)]"
                 color="#cbd5e1"
                 shineColor="#ffffff"
                 speed={2.5}
@@ -843,20 +859,20 @@ export default function Portfolio() {
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5 }}
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 mb-16 relative group">
-                    {/* Left Column (Dates - md:col-span-3, Clean & Minimal without Redundant Status Badges) */}
-                    <div className="md:col-span-3 md:text-right pt-0.5">
-                      <span className="text-slate-400 font-mono text-sm tracking-widest block">
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-12 mb-12 md:mb-16 relative group">
+                    {/* Left Column (Dates - md:col-span-3) */}
+                    <div className="md:col-span-3 md:text-right pt-0.5 pl-6 md:pl-0">
+                      <span className="text-slate-400 font-mono text-xs sm:text-sm tracking-widest block">
                         {item.period}
                       </span>
                     </div>
 
                     {/* Right Column (Content & Line - md:col-span-9) */}
-                    <div className="md:col-span-9 border-l border-white/10 pl-8 md:pl-10 relative">
-                      {/* Timeline Dot Indicator: Blinking beacon for current role, emerald checkmark for completed internship */}
+                    <div className="md:col-span-9 border-l border-white/10 pl-6 md:pl-10 relative">
+                      {/* Timeline Dot Indicator */}
                       {item.status === 'current' ? (
                         <div 
                           className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-cyan-500/20 border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_15px_#06b6d4] group-hover:scale-125 transition-transform duration-300"
@@ -874,15 +890,15 @@ export default function Portfolio() {
                         </div>
                       )}
 
-                      {/* Content Card (Clean, text-focused, no heavy background box) */}
+                      {/* Content Card */}
                       <div>
-                        <h3 className="text-xl text-slate-100 font-bold tracking-wide mb-1 group-hover:text-cyan-300 transition-colors font-display">
+                        <h3 className="text-lg sm:text-xl text-slate-100 font-bold tracking-wide mb-1 group-hover:text-cyan-300 transition-colors font-display">
                           {item.role}
                         </h3>
-                        <p className="text-slate-400 font-medium mb-4">
+                        <p className="text-slate-400 text-xs sm:text-sm font-medium mb-3 sm:mb-4">
                           {item.company}
                         </p>
-                        <p className="text-slate-400 text-sm leading-relaxed mb-6 font-sans">
+                        <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 font-sans">
                           {item.description}
                         </p>
 
@@ -892,7 +908,7 @@ export default function Portfolio() {
                             {item.skills.map((skill, sIdx) => (
                               <span
                                 key={sIdx}
-                                className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-slate-300 text-xs font-mono tracking-wider mr-2 mb-2 inline-block hover:bg-white/10 transition-colors"
+                                className="px-2.5 sm:px-3 py-0.5 sm:py-1 bg-white/5 border border-white/10 rounded-full text-slate-300 text-[10px] sm:text-xs font-mono tracking-wider mr-1.5 sm:mr-2 mb-1.5 sm:mb-2 inline-block hover:bg-white/10 transition-colors"
                               >
                                 {skill}
                               </span>
@@ -910,12 +926,12 @@ export default function Portfolio() {
 
         {/* CERTIFICATIONS SECTION: Clean Rows Without Chunky Code Boxes */}
         {activeSection === 'certifications' && (
-          <div className="w-full max-w-5xl mx-auto flex flex-col justify-center animate-zoom-in h-full pt-16 pb-8">
+          <div className="w-full max-w-5xl mx-auto flex flex-col justify-center animate-zoom-in min-h-full py-20 md:py-16 pb-8">
             {/* Clean Section Title with Shiny Text */}
-            <div className="text-center mb-8">
+            <div className="text-center mb-4 sm:mb-8">
               <ShinyText
                 text="CREDENTIALS & ACCREDITATIONS"
-                className="font-display text-sm md:text-base tracking-[0.35em] uppercase font-bold text-white"
+                className="font-display text-xs sm:text-sm md:text-base tracking-[0.3em] sm:tracking-[0.35em] uppercase font-bold text-white"
                 color="#94a3b8"
                 shineColor="#ffffff"
                 speed={2.5}
@@ -924,7 +940,7 @@ export default function Portfolio() {
             </div>
 
             {/* Category Filter Pills in Minimal Monochrome Glass */}
-            <div className="flex items-center justify-center gap-2 mb-8">
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-6 sm:mb-8 px-2">
               {[
                 { id: 'all', label: 'All Credentials (10)' },
                 { id: 'industry', label: 'Industry Certifications' },
@@ -934,7 +950,7 @@ export default function Portfolio() {
                 <button
                   key={filter.id}
                   onClick={() => setCertFilter(filter.id as any)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all duration-300 ${
+                  className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-mono tracking-wider transition-all duration-300 ${
                     certFilter === filter.id
                       ? 'bg-white text-black font-semibold shadow-[0_0_20px_rgba(255,255,255,0.2)]'
                       : 'bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10'
@@ -946,7 +962,7 @@ export default function Portfolio() {
             </div>
 
             {/* Clean Credential Strips with Cascading Deck Entrance Animation */}
-            <div className="flex-1 max-h-[60vh] overflow-y-auto no-scrollbar space-y-3 pr-2">
+            <div className="flex-1 max-h-[62vh] overflow-y-auto no-scrollbar space-y-2.5 sm:space-y-3 px-1 sm:pr-2">
               <AnimatePresence mode="popLayout">
                 {filteredCertifications.map((cert, index) => (
                   <motion.div
@@ -960,28 +976,28 @@ export default function Portfolio() {
                       ease: [0.16, 1, 0.3, 1] 
                     }}
                     onClick={() => setSelectedCert(cert)}
-                    className="backdrop-blur-xl bg-white/[0.02] border border-white/10 hover:border-cyan-500/40 rounded-2xl p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-300 hover:bg-white/[0.06] hover:-translate-y-1 cursor-pointer group shadow-lg"
+                    className="backdrop-blur-xl bg-white/[0.02] border border-white/10 hover:border-cyan-500/40 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 md:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 transition-all duration-300 hover:bg-white/[0.06] hover:-translate-y-1 cursor-pointer group shadow-lg"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400 group-hover:text-white group-hover:bg-cyan-500/20 group-hover:border-cyan-500/30 transition-colors flex-shrink-0">
-                        <FileText size={20} />
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400 group-hover:text-white group-hover:bg-cyan-500/20 group-hover:border-cyan-500/30 transition-colors flex-shrink-0">
+                        <FileText size={18} />
                       </div>
-                      <div>
-                        <h4 className="font-display text-sm md:text-base font-bold text-white group-hover:text-cyan-200 transition-colors">
+                      <div className="min-w-0">
+                        <h4 className="font-display text-xs sm:text-sm md:text-base font-bold text-white group-hover:text-cyan-200 transition-colors leading-snug">
                           {cert.title}
                         </h4>
-                        <div className="flex items-center gap-2 text-xs text-slate-400 mt-1">
+                        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-slate-400 mt-1">
                           <span className="text-white font-medium">{cert.issuer}</span>
                           <span>•</span>
-                          <span className="font-mono text-[11px] text-slate-400">{cert.category}</span>
+                          <span className="font-mono text-[10px] sm:text-[11px] text-slate-400">{cert.category}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Clean Action Button */}
-                    <div className="self-end md:self-center px-4 py-2 rounded-xl bg-white/5 group-hover:bg-cyan-500/15 border border-white/15 group-hover:border-cyan-500/30 text-xs font-display tracking-wider uppercase text-white flex items-center gap-2 transition-all flex-shrink-0">
+                    <div className="self-end sm:self-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-white/5 group-hover:bg-cyan-500/15 border border-white/15 group-hover:border-cyan-500/30 text-[10px] sm:text-xs font-display tracking-wider uppercase text-white flex items-center gap-1.5 sm:gap-2 transition-all flex-shrink-0">
                       <span>View Credential</span>
-                      <ExternalLink size={14} className="text-cyan-400" />
+                      <ExternalLink size={12} className="text-cyan-400" />
                     </div>
                   </motion.div>
                 ))}
@@ -996,24 +1012,24 @@ export default function Portfolio() {
       {selectedCert && (
         <div 
           onClick={() => setSelectedCert(null)}
-          className="fixed inset-0 z-[10000] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-3 md:p-6 animate-[fadeIn_0.25s_ease-out]"
+          className="fixed inset-0 z-[10000] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-[fadeIn_0.25s_ease-out]"
         >
           <div 
             onClick={e => e.stopPropagation()}
-            className="w-full max-w-5xl h-[92vh] flex flex-col rounded-3xl overflow-hidden relative shadow-[0_25px_80px_rgba(0,0,0,0.95)] border border-white/15 bg-[#09090d] animate-[zoomInView_0.3s_cubic-bezier(0.16,1,0.3,1)]"
+            className="w-full max-w-5xl h-[95vh] sm:h-[92vh] flex flex-col rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_25px_80px_rgba(0,0,0,0.95)] border border-white/15 bg-[#09090d] animate-[zoomInView_0.3s_cubic-bezier(0.16,1,0.3,1)]"
           >
             {/* Themed Header Bar */}
-            <div className="w-full px-6 py-4 border-b border-white/10 bg-white/[0.02] flex items-center justify-between gap-4 flex-shrink-0">
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 flex-shrink-0">
-                  <FileText size={18} />
+            <div className="w-full px-3.5 sm:px-6 py-2.5 sm:py-4 border-b border-white/10 bg-white/[0.02] flex items-center justify-between gap-2 sm:gap-4 flex-shrink-0">
+              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 flex-shrink-0">
+                  <FileText size={16} />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-sm md:text-base font-bold text-white font-display truncate">
+                  <h3 className="text-xs sm:text-base font-bold text-white font-display truncate">
                     {selectedCert.title}
                   </h3>
-                  <p className="text-xs text-slate-400 font-mono flex items-center gap-2">
-                    <span className="text-cyan-400 font-medium">{selectedCert.issuer}</span>
+                  <p className="text-[10px] sm:text-xs text-slate-400 font-mono flex items-center gap-1.5 sm:gap-2">
+                    <span className="text-cyan-400 font-medium truncate">{selectedCert.issuer}</span>
                     <span>•</span>
                     <span className="truncate">{selectedCert.category}</span>
                   </p>
@@ -1021,111 +1037,112 @@ export default function Portfolio() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center gap-2 flex-shrink-0">
+              <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
                 <a
                   href={selectedCert.file}
                   download
-                  className="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 text-xs font-mono text-white flex items-center gap-1.5 transition-all shadow-md"
+                  className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 text-[10px] sm:text-xs font-mono text-white flex items-center gap-1 sm:gap-1.5 transition-all shadow-md"
                   title="Download File"
                 >
-                  <Download size={13} className="text-cyan-400" />
+                  <Download size={12} className="text-cyan-400" />
                   <span className="hidden sm:inline">Download</span>
                 </a>
                 <a
                   href={selectedCert.file}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 text-xs font-mono text-white flex items-center gap-1.5 transition-all shadow-md"
+                  className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 text-[10px] sm:text-xs font-mono text-white flex items-center gap-1 sm:gap-1.5 transition-all shadow-md"
                   title="Open in Full Tab"
                 >
-                  <ExternalLink size={13} />
+                  <ExternalLink size={12} />
                   <span className="hidden sm:inline">Open</span>
                 </a>
                 <button
                   onClick={() => setSelectedCert(null)}
-                  className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/20 border border-white/15 text-white flex items-center justify-center transition-all ml-1"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/5 hover:bg-white/20 border border-white/15 text-white flex items-center justify-center transition-all ml-0.5"
                   title="Close Modal"
                 >
-                  <X size={16} />
+                  <X size={15} />
                 </button>
               </div>
             </div>
 
-            {/* Document Content Viewport: Pure High-Res Render (Zero Scrollbars, Zero Iframe Plugin Controls) */}
-            <div className="w-full flex-1 bg-[#050508] p-3 sm:p-6 flex items-center justify-center overflow-hidden relative select-none">
+            {/* Document Content Viewport */}
+            <div className="w-full flex-1 bg-[#050508] p-2 sm:p-6 flex items-center justify-center overflow-hidden relative select-none">
               <img
                 src={selectedCert.previewImage || selectedCert.file}
                 alt={selectedCert.title}
-                className="max-h-[80vh] max-w-full w-auto object-contain rounded-2xl border border-white/15 shadow-[0_25px_70px_rgba(0,0,0,0.9)]"
+                className="max-h-[78vh] sm:max-h-[80vh] max-w-full w-auto object-contain rounded-xl sm:rounded-2xl border border-white/15 shadow-[0_25px_70px_rgba(0,0,0,0.9)]"
               />
             </div>
           </div>
         </div>
       )}
 
-      {/* THEMED RESUME MODAL VIEWER (Zero Browser Plugins, Entire 1-Page Viewport) */}
+      {/* THEMED RESUME MODAL VIEWER */}
       {showResumeModal && (
         <div 
           onClick={() => setShowResumeModal(false)}
-          className="fixed inset-0 z-[10000] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-3 md:p-6 animate-[fadeIn_0.25s_ease-out]"
+          className="fixed inset-0 z-[10000] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-[fadeIn_0.25s_ease-out]"
         >
           <div 
             onClick={e => e.stopPropagation()}
-            className="w-full max-w-5xl h-[92vh] flex flex-col rounded-3xl overflow-hidden relative shadow-[0_25px_80px_rgba(0,0,0,0.95)] border border-white/15 bg-[#09090d] animate-[zoomInView_0.3s_cubic-bezier(0.16,1,0.3,1)]"
+            className="w-full max-w-5xl h-[95vh] sm:h-[92vh] flex flex-col rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_25px_80px_rgba(0,0,0,0.95)] border border-white/15 bg-[#09090d] animate-[zoomInView_0.3s_cubic-bezier(0.16,1,0.3,1)]"
           >
             {/* Themed Header Bar */}
-            <div className="w-full px-6 py-4 border-b border-white/10 bg-white/[0.02] flex items-center justify-between gap-4 flex-shrink-0">
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 flex-shrink-0">
-                  <FileText size={18} />
+            <div className="w-full px-3.5 sm:px-6 py-2.5 sm:py-4 border-b border-white/10 bg-white/[0.02] flex items-center justify-between gap-2 sm:gap-4 flex-shrink-0">
+              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 flex-shrink-0">
+                  <FileText size={16} />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-sm md:text-base font-bold text-white font-display truncate">
+                  <h3 className="text-xs sm:text-base font-bold text-white font-display truncate">
                     Nandhana K S — Professional Curriculum Vitae
                   </h3>
-                  <p className="text-xs text-slate-400 font-mono">
+                  <p className="text-[10px] sm:text-xs text-slate-400 font-mono truncate">
                     <span className="text-cyan-400 font-medium">Cybersecurity Specialist</span> • Complete 1-Page Document
                   </p>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center gap-2 flex-shrink-0">
+              <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
                 <a
                   href="/resume.pdf"
                   download="Nandhana_KS_Resume.pdf"
-                  className="px-4 py-1.5 rounded-full bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-xs font-mono text-cyan-200 flex items-center gap-2 transition-all shadow-md font-semibold"
+                  className="px-2.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-[10px] sm:text-xs font-mono text-cyan-200 flex items-center gap-1.5 transition-all shadow-md font-semibold"
                   title="Download Resume PDF"
                 >
-                  <Download size={13} />
-                  <span>Download PDF</span>
+                  <Download size={12} />
+                  <span className="hidden sm:inline">Download PDF</span>
+                  <span className="sm:hidden">PDF</span>
                 </a>
                 <a
                   href="/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 text-xs font-mono text-white flex items-center gap-1.5 transition-all shadow-md"
+                  className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 text-[10px] sm:text-xs font-mono text-white flex items-center gap-1 sm:gap-1.5 transition-all shadow-md"
                   title="Open Original in New Tab"
                 >
-                  <ExternalLink size={13} />
+                  <ExternalLink size={12} />
                   <span className="hidden sm:inline">Open</span>
                 </a>
                 <button
                   onClick={() => setShowResumeModal(false)}
-                  className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/20 border border-white/15 text-white flex items-center justify-center transition-all ml-1"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/5 hover:bg-white/20 border border-white/15 text-white flex items-center justify-center transition-all ml-0.5"
                   title="Close Resume"
                 >
-                  <X size={16} />
+                  <X size={15} />
                 </button>
               </div>
             </div>
 
-            {/* Document Content Viewport: Fits Entire Single Page on Screen with Zero Scrollbars */}
-            <div className="w-full flex-1 bg-[#050508] p-3 sm:p-6 flex items-center justify-center overflow-hidden relative select-none">
+            {/* Document Content Viewport */}
+            <div className="w-full flex-1 bg-[#050508] p-2 sm:p-6 flex items-center justify-center overflow-hidden relative select-none">
               <img
                 src="/resume-preview.png"
                 alt="Nandhana K S Resume"
-                className="max-h-[81vh] max-w-full w-auto object-contain rounded-xl border border-white/15 shadow-[0_25px_70px_rgba(0,0,0,0.9)]"
+                className="max-h-[78vh] sm:max-h-[81vh] max-w-full w-auto object-contain rounded-xl border border-white/15 shadow-[0_25px_70px_rgba(0,0,0,0.9)]"
               />
             </div>
           </div>
@@ -1150,11 +1167,32 @@ const CaseStudyTransition = ({ project, onClose }: { project: any; onClose: () =
     const t1 = setTimeout(() => setPhase(1), 100);
     const t2 = setTimeout(() => setPhase(2), 1100);
     const t3 = setTimeout(() => setShowDetails(true), 1200);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-  }, []);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => { 
+      clearTimeout(t1); 
+      clearTimeout(t2); 
+      clearTimeout(t3); 
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose]);
 
   return (
     <div className="w-full h-full relative animate-slideDownFull bg-white overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+      {/* Top-Level High-Z Back Button (Always Clickable on Desktop & Mobile) */}
+      <button 
+        onClick={onClose}
+        className="fixed top-3 sm:top-5 left-3 sm:left-6 text-slate-300 hover:text-white transition-all z-[1000] bg-[#050507]/80 hover:bg-white/15 border border-white/20 rounded-full p-2.5 sm:p-3 flex items-center justify-center cursor-pointer shadow-2xl backdrop-blur-xl"
+        title="Return to Projects"
+        aria-label="Close Case Study"
+      >
+        <ArrowLeft size={18} />
+      </button>
+
       <PixelSwap
         active={showDetails}
         trigger="manual"
@@ -1169,7 +1207,7 @@ const CaseStudyTransition = ({ project, onClose }: { project: any; onClose: () =
             <div className={`transition-opacity duration-700 ${phase === 1 && !showDetails ? 'opacity-100' : 'opacity-0'} px-4`}>
               <ShinyText 
                 text={project.title} 
-                className="font-display text-2xl md:text-3xl lg:text-4xl font-bold uppercase tracking-widest text-center" 
+                className="font-display text-xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-widest text-center" 
                 color="#000000"
                 shineColor="#a8a29e" 
                 speed={2} 
@@ -1178,22 +1216,14 @@ const CaseStudyTransition = ({ project, onClose }: { project: any; onClose: () =
           </div>
         }
         secondContent={
-          <div className="h-full w-full bg-[#050507] p-4 md:p-6 lg:p-8 overflow-y-auto no-scrollbar flex flex-col relative z-20">
-            <button 
-              onClick={onClose}
-              className="absolute top-4 left-4 md:left-6 text-slate-400 hover:text-white transition-all z-30 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full p-2.5 flex items-center justify-center cursor-pointer shadow-lg"
-              title="Return to Projects"
-            >
-              <ArrowLeft size={20} />
-            </button>
-            
-            <div className="relative z-10 w-full flex flex-col items-center max-w-6xl mx-auto my-auto py-6">
+          <div className="h-full w-full bg-[#050507] p-3 sm:p-6 lg:p-8 overflow-y-auto no-scrollbar flex flex-col relative z-20">
+            <div className="relative z-10 w-full flex flex-col items-center max-w-6xl mx-auto pt-14 sm:pt-6 pb-12">
               {/* Scaled High-Visibility Title with Domain Perspective */}
-              <div className="text-center mb-6">
-                <span className="text-[10px] md:text-[11px] font-mono tracking-[0.28em] uppercase text-slate-400 font-medium block mb-1.5">
+              <div className="text-center mb-5 sm:mb-6 px-4">
+                <span className="text-[10px] md:text-[11px] font-mono tracking-[0.2em] sm:tracking-[0.28em] uppercase text-slate-400 font-medium block mb-1">
                   {project.domain || "Cybersecurity Architecture"}
                 </span>
-                <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-bold text-white uppercase tracking-wider">
+                <h2 className="font-display text-lg sm:text-2xl lg:text-3xl font-bold text-white uppercase tracking-wider">
                   {project.title}
                 </h2>
               </div>
