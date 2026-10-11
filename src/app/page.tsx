@@ -451,10 +451,10 @@ export default function Portfolio() {
               <li key={id} className="flex-shrink-0">
                 <button
                   onClick={() => handleNavClick(id)}
-                  className={`transition-all duration-300 px-2 sm:px-2.5 py-1 rounded-full ${
+                  className={`transition-colors duration-300 px-2 sm:px-2.5 py-1 ${
                     activeSection === id 
-                      ? 'text-white font-bold bg-white/10 shadow-[0_0_12px_rgba(255,255,255,0.15)]' 
-                      : 'text-slate-400 hover:text-white hover:bg-white/5'
+                      ? 'text-white font-bold tracking-wider' 
+                      : 'text-slate-400 hover:text-white'
                   }`}
                 >
                   {label}
@@ -574,7 +574,7 @@ export default function Portfolio() {
 
         {/* ABOUT SECTION */}
         {activeSection === 'about' && (
-          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center animate-zoom-in min-h-full py-20 md:py-0">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center animate-zoom-in min-h-full pt-28 sm:pt-32 md:pt-0 pb-16 md:pb-0">
             {/* Left Column: Interactive 3D Sphere */}
             <div className="relative w-full h-[230px] sm:h-[320px] lg:h-[480px] flex justify-center items-center">
               <div className="absolute inset-0 z-10 opacity-80">
@@ -628,9 +628,9 @@ export default function Portfolio() {
 
         {/* SKILLS SECTION: Single Tap-to-Swap Card with Refined Compact Spacing */}
         {activeSection === 'skills' && (
-          <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center animate-zoom-in min-h-full pt-20 sm:pt-24 pb-6">
+          <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-start md:justify-center animate-zoom-in min-h-full pt-24 sm:pt-28 md:pt-24 pb-12">
             {/* Clean Section Title with Shiny Text */}
-            <div className="text-center mb-2 sm:mb-3">
+            <div className="text-center mb-6 sm:mb-8">
               <ShinyText
                 text="WHAT I OFFER"
                 className="font-display text-sm md:text-lg tracking-[0.35em] uppercase font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.25)]"
@@ -640,11 +640,6 @@ export default function Portfolio() {
                 trigger="loop"
               />
             </div>
-
-            {/* Mobile Interaction Hint */}
-            <span className="text-[10px] font-mono text-slate-400 tracking-wider text-center block mb-3 sm:mb-4">
-              Tap card to toggle domain perspective (Red Team ↔ Blue Team)
-            </span>
 
             {/* Single Interactive Tap-to-Swap Card with Framer Motion (Tap card to toggle Offensive <-> Defensive) */}
             <div 
@@ -803,20 +798,17 @@ export default function Portfolio() {
 
         {/* PROJECTS SECTION */}
         {activeSection === 'projects' && (
-          <div className="w-full flex flex-col items-center justify-center animate-[fadeIn_0.8s_ease-out_forwards] min-h-full pt-20 md:pt-16 pb-12">
+          <div className="w-full flex flex-col items-center justify-start md:justify-center animate-[fadeIn_0.8s_ease-out_forwards] min-h-full pt-28 sm:pt-32 md:pt-28 pb-16">
             {/* Clean Section Title with Shiny Text */}
-            <div className="mb-6 md:mb-10 text-center">
+            <div className="mb-8 md:mb-10 text-center">
               <ShinyText
                 text="FEATURED ARCHITECTURE"
-                className="font-display text-xs sm:text-sm md:text-base tracking-[0.35em] uppercase font-bold text-white"
-                color="#94a3b8"
+                className="font-display text-sm md:text-base tracking-[0.35em] uppercase font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.25)]"
+                color="#cbd5e1"
                 shineColor="#ffffff"
                 speed={2.5}
                 trigger="loop"
               />
-              <span className="text-[10px] font-mono text-slate-400 tracking-wider block mt-1">
-                Tap any architecture to launch complete case study
-              </span>
             </div>
 
             <section className="w-full max-w-[1400px] mx-auto px-1 sm:px-4">
@@ -839,7 +831,7 @@ export default function Portfolio() {
 
         {/* EXPERIENCE SECTION: Two-Column Split Layout with Transparent Ambient Background */}
         {activeSection === 'experience' && (
-          <div className="w-full h-full max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-32 overflow-y-auto no-scrollbar">
+          <div className="w-full h-full max-w-6xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 md:pt-32 pb-20 overflow-y-auto no-scrollbar">
             {/* Section Heading in Bold Pure Metallic Shiny Text */}
             <div className="text-center mb-12 md:mb-20">
               <ShinyText
@@ -926,13 +918,13 @@ export default function Portfolio() {
 
         {/* CERTIFICATIONS SECTION: Clean Rows Without Chunky Code Boxes */}
         {activeSection === 'certifications' && (
-          <div className="w-full max-w-5xl mx-auto flex flex-col justify-center animate-zoom-in min-h-full py-20 md:py-16 pb-8">
+          <div className="w-full max-w-5xl mx-auto flex flex-col justify-start md:justify-center animate-zoom-in min-h-full pt-28 sm:pt-32 md:pt-28 pb-16">
             {/* Clean Section Title with Shiny Text */}
-            <div className="text-center mb-4 sm:mb-8">
+            <div className="text-center mb-6 sm:mb-8">
               <ShinyText
                 text="CREDENTIALS & ACCREDITATIONS"
-                className="font-display text-xs sm:text-sm md:text-base tracking-[0.3em] sm:tracking-[0.35em] uppercase font-bold text-white"
-                color="#94a3b8"
+                className="font-display text-xs sm:text-sm md:text-base tracking-[0.3em] sm:tracking-[0.35em] uppercase font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.25)]"
+                color="#cbd5e1"
                 shineColor="#ffffff"
                 speed={2.5}
                 trigger="loop"
