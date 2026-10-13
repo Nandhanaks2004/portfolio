@@ -70,12 +70,22 @@ export default function Portfolio() {
   const [activeCaseStudy, setActiveCaseStudy] = useState<any>(null);
   const [selectedCert, setSelectedCert] = useState<any>(null);
   const [showResumeModal, setShowResumeModal] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
   const [certFilter, setCertFilter] = useState<'all' | 'industry' | 'offensive' | 'simulation'>('all');
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [skillTab, setSkillTab] = useState<'offensive' | 'defensive'>('offensive');
 
-  const handleMailClick = () => {
-    // Copy to clipboard as seamless reliable backup
+  const handleMailClick = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText("nandhanaks321@gmail.com").catch(() => {});
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 3000);
+    }
+    setShowContactModal(true);
+  };
+
+  const handleMailCopyOnly = () => {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText("nandhanaks321@gmail.com").catch(() => {});
       setCopiedEmail(true);
@@ -480,7 +490,7 @@ export default function Portfolio() {
           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent to-white/20 mb-1"></div>
           <a href="https://linkedin.com/in/nandhana-k-s-49b79827b" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all hover:scale-110 shadow-lg" title="LinkedIn Profile"><FaLinkedin size={18} /></a>
           <a href="https://github.com/Nandhanaks2004" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all hover:scale-110 shadow-lg" title="GitHub Profile"><FaGithub size={18} /></a>
-          <a href="mailto:nandhanaks321@gmail.com?subject=Inquiry%20%7C%20Cybersecurity%20Portfolio&body=Hello%20Nandhana%2C%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0D%0A%0D%0A" onClick={handleMailClick} className="p-2.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all hover:scale-110 shadow-lg cursor-pointer" title="Email: nandhanaks321@gmail.com (Click to open email client)"><Mail size={18} /></a>
+          <button onClick={handleMailClick} className="p-2.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all hover:scale-110 shadow-lg cursor-pointer" title="Email: nandhanaks321@gmail.com (Click to contact)"><Mail size={18} /></button>
           <div className="w-[1px] h-16 bg-gradient-to-t from-transparent to-white/20 mt-1"></div>
         </div>
       )}
@@ -568,7 +578,7 @@ export default function Portfolio() {
               <span className="text-[10px] font-mono tracking-widest uppercase text-slate-400 mr-1">Connect:</span>
               <a href="https://linkedin.com/in/nandhana-k-s-49b79827b" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all shadow-md" title="LinkedIn Profile"><FaLinkedin size={16} /></a>
               <a href="https://github.com/Nandhanaks2004" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all shadow-md" title="GitHub Profile"><FaGithub size={16} /></a>
-              <a href="mailto:nandhanaks321@gmail.com?subject=Inquiry%20%7C%20Cybersecurity%20Portfolio&body=Hello%20Nandhana%2C%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0D%0A%0D%0A" onClick={handleMailClick} className="p-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all shadow-md cursor-pointer" title="Email: nandhanaks321@gmail.com (Click to open email client)"><Mail size={16} /></a>
+              <button onClick={handleMailClick} className="p-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all shadow-md cursor-pointer" title="Email: nandhanaks321@gmail.com (Click to contact)"><Mail size={16} /></button>
             </div>
           </div>
         )}
@@ -1137,6 +1147,152 @@ export default function Portfolio() {
                 alt="Nandhana K S Resume"
                 className="max-h-[78vh] sm:max-h-[81vh] max-w-full w-auto object-contain rounded-xl border border-white/15 shadow-[0_25px_70px_rgba(0,0,0,0.9)]"
               />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* THEMED DIRECT CONTACT & EMAIL MODAL */}
+      {showContactModal && (
+        <div 
+          onClick={() => setShowContactModal(false)}
+          className="fixed inset-0 z-[10000] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-4 md:p-6 animate-[fadeIn_0.25s_ease-out]"
+        >
+          <div 
+            onClick={e => e.stopPropagation()}
+            className="w-full max-w-lg rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_25px_80px_rgba(0,0,0,0.95)] border border-white/15 bg-[#09090d] animate-[zoomInView_0.3s_cubic-bezier(0.16,1,0.3,1)]"
+          >
+            {/* Themed Header Bar */}
+            <div className="w-full px-4 sm:px-6 py-3.5 sm:py-4 border-b border-white/10 bg-white/[0.02] flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 flex-shrink-0">
+                  <Mail size={18} />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-sm sm:text-base font-bold text-white font-display truncate">
+                    Get in Touch
+                  </h3>
+                  <p className="text-[11px] sm:text-xs text-slate-400 font-mono truncate">
+                    Direct inquiries & security research collaborations
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setShowContactModal(false)}
+                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/20 border border-white/15 text-white flex items-center justify-center transition-all flex-shrink-0"
+                title="Close Modal"
+              >
+                <X size={15} />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-4 sm:p-6 space-y-4">
+              {/* Email Address Bar with 1-Click Copy */}
+              <div className="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-between gap-3">
+                <div className="min-w-0 flex items-center gap-2.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
+                  <div className="min-w-0">
+                    <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400 block">Recipient Address</span>
+                    <span className="font-mono text-xs sm:text-sm text-cyan-300 font-medium truncate block">
+                      nandhanaks321@gmail.com
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleMailCopyOnly}
+                  className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 border border-white/15 text-white text-xs font-mono flex items-center gap-1.5 transition-all flex-shrink-0 cursor-pointer"
+                >
+                  {copiedEmail ? (
+                    <>
+                      <Check size={13} className="text-emerald-400" />
+                      <span className="text-emerald-300 font-semibold">Copied!</span>
+                    </>
+                  ) : (
+                    <span>Copy</span>
+                  )}
+                </button>
+              </div>
+
+              {/* Action Cards */}
+              <div className="space-y-2.5 pt-1">
+                <span className="text-[10px] font-mono tracking-widest uppercase text-slate-400 block px-0.5">
+                  Choose Preferred Mail Method:
+                </span>
+
+                {/* Option 1: Gmail (Web Browser) - Highest reliability */}
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=nandhanaks321@gmail.com&su=Inquiry%20%7C%20Cybersecurity%20Portfolio&body=Hello%20Nandhana%2C%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0D%0A%0D%0A"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setShowContactModal(false)}
+                  className="w-full p-3 sm:p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 border border-white/10 hover:border-cyan-400/40 flex items-center justify-between group transition-all shadow-md cursor-pointer"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 flex-shrink-0">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                      </svg>
+                    </div>
+                    <div className="text-left">
+                      <div className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors flex items-center gap-2">
+                        <span>Open in Gmail</span>
+                        <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase">Instant Web</span>
+                      </div>
+                      <div className="text-[11px] text-slate-400 font-sans">Opens compose tab directly in your browser</div>
+                    </div>
+                  </div>
+                  <ExternalLink size={14} className="text-slate-400 group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+                </a>
+
+                {/* Option 2: Default System Mail App (Mailto) */}
+                <a
+                  href="mailto:nandhanaks321@gmail.com?subject=Inquiry%20%7C%20Cybersecurity%20Portfolio&body=Hello%20Nandhana%2C%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0D%0A%0D%0A"
+                  onClick={() => setShowContactModal(false)}
+                  className="w-full p-3 sm:p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 flex items-center justify-between group transition-all shadow-md cursor-pointer"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 flex-shrink-0">
+                      <Mail size={16} />
+                    </div>
+                    <div className="text-left">
+                      <div className="text-xs sm:text-sm font-bold text-white group-hover:text-white transition-colors flex items-center gap-2">
+                        <span>Default Mail App</span>
+                        <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-white/10 text-slate-300 border border-white/15 uppercase">App</span>
+                      </div>
+                      <div className="text-[11px] text-slate-400 font-sans">Apple Mail, Windows Mail, Outlook desktop app</div>
+                    </div>
+                  </div>
+                  <ArrowUpRight size={14} className="text-slate-400 group-hover:text-white group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+                </a>
+
+                {/* Option 3: Outlook Web */}
+                <a
+                  href="https://outlook.live.com/mail/0/deeplink/compose?to=nandhanaks321@gmail.com&subject=Inquiry%20%7C%20Cybersecurity%20Portfolio&body=Hello%20Nandhana%2C%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0D%0A%0D%0A"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setShowContactModal(false)}
+                  className="w-full p-3 sm:p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 flex items-center justify-between group transition-all shadow-md cursor-pointer"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 flex-shrink-0">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22.5 4h-21A1.5 1.5 0 0 0 0 5.5v13A1.5 1.5 0 0 0 1.5 20h21a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 22.5 4zm-.5 3.125-9.458 6.03a1 1 0 0 1-1.084 0L2 7.125V6l10 6.375L22 6v1.125z"/>
+                      </svg>
+                    </div>
+                    <div className="text-left">
+                      <div className="text-xs sm:text-sm font-bold text-white group-hover:text-white transition-colors flex items-center gap-2">
+                        <span>Open in Outlook Web</span>
+                        <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-white/10 text-slate-300 border border-white/15 uppercase">Web</span>
+                      </div>
+                      <div className="text-[11px] text-slate-400 font-sans">Opens compose window on Outlook.com</div>
+                    </div>
+                  </div>
+                  <ExternalLink size={14} className="text-slate-400 group-hover:text-white group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
