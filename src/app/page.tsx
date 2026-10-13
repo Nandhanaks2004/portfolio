@@ -1152,148 +1152,80 @@ export default function Portfolio() {
         </div>
       )}
 
-      {/* THEMED DIRECT CONTACT & EMAIL MODAL */}
+      {/* THEMED DIRECT CONTACT & EMAIL MODAL (Minimal Luxury Glassmorphism) */}
       {showContactModal && (
         <div 
           onClick={() => setShowContactModal(false)}
-          className="fixed inset-0 z-[10000] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-4 md:p-6 animate-[fadeIn_0.25s_ease-out]"
+          className="fixed inset-0 z-[10000] bg-black/80 backdrop-blur-xl flex items-center justify-center p-4 animate-[fadeIn_0.2s_ease-out]"
         >
           <div 
             onClick={e => e.stopPropagation()}
-            className="w-full max-w-lg rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_25px_80px_rgba(0,0,0,0.95)] border border-white/15 bg-[#09090d] animate-[zoomInView_0.3s_cubic-bezier(0.16,1,0.3,1)]"
+            className="w-full max-w-sm rounded-3xl p-6 sm:p-7 relative shadow-[0_30px_90px_rgba(0,0,0,0.95)] border border-white/15 bg-white/[0.03] backdrop-blur-3xl animate-[zoomInView_0.25s_cubic-bezier(0.16,1,0.3,1)] flex flex-col"
+            style={{
+              boxShadow: "0 25px 60px -15px rgba(0, 0, 0, 0.9), inset 0 1px 0 0 rgba(255, 255, 255, 0.15)"
+            }}
           >
-            {/* Themed Header Bar */}
-            <div className="w-full px-4 sm:px-6 py-3.5 sm:py-4 border-b border-white/10 bg-white/[0.02] flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 flex-shrink-0">
-                  <Mail size={18} />
-                </div>
-                <div className="min-w-0">
-                  <h3 className="text-sm sm:text-base font-bold text-white font-display truncate">
-                    Get in Touch
-                  </h3>
-                  <p className="text-[11px] sm:text-xs text-slate-400 font-mono truncate">
-                    Direct inquiries & security research collaborations
-                  </p>
-                </div>
+            {/* Top Close Button */}
+            <button
+              onClick={() => setShowContactModal(false)}
+              className="absolute top-4 right-4 w-7 h-7 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-all cursor-pointer"
+              title="Close"
+              aria-label="Close"
+            >
+              <X size={13} />
+            </button>
+
+            {/* Header */}
+            <div className="mb-6 text-left">
+              <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-slate-400 block mb-1">
+                Direct Contact
+              </span>
+              <h3 className="text-base sm:text-lg font-bold text-white font-display uppercase tracking-wider">
+                Get In Touch
+              </h3>
+            </div>
+
+            {/* Email Address Container with Copy Action */}
+            <div className="mb-4 p-3.5 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-white/20 transition-all flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <span className="text-[9px] font-mono tracking-widest uppercase text-slate-400 block mb-0.5">
+                  Email Address
+                </span>
+                <span className="font-mono text-xs sm:text-[13px] text-white font-medium select-all block truncate">
+                  nandhanaks321@gmail.com
+                </span>
               </div>
 
               <button
-                onClick={() => setShowContactModal(false)}
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/20 border border-white/15 text-white flex items-center justify-center transition-all flex-shrink-0"
-                title="Close Modal"
+                onClick={handleMailCopyOnly}
+                className={`px-3 py-1.5 rounded-xl border text-[11px] font-mono tracking-wider uppercase transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
+                  copiedEmail 
+                    ? 'bg-white text-black border-white font-bold shadow-[0_0_15px_rgba(255,255,255,0.4)]' 
+                    : 'bg-white/5 hover:bg-white/15 border-white/15 text-slate-200 hover:text-white'
+                }`}
               >
-                <X size={15} />
+                {copiedEmail ? (
+                  <>
+                    <Check size={11} strokeWidth={3} />
+                    <span>Copied</span>
+                  </>
+                ) : (
+                  <span>Copy</span>
+                )}
               </button>
             </div>
 
-            {/* Modal Body */}
-            <div className="p-4 sm:p-6 space-y-4">
-              {/* Email Address Bar with 1-Click Copy */}
-              <div className="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-between gap-3">
-                <div className="min-w-0 flex items-center gap-2.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
-                  <div className="min-w-0">
-                    <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400 block">Recipient Address</span>
-                    <span className="font-mono text-xs sm:text-sm text-cyan-300 font-medium truncate block">
-                      nandhanaks321@gmail.com
-                    </span>
-                  </div>
-                </div>
-
-                <button
-                  onClick={handleMailCopyOnly}
-                  className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 border border-white/15 text-white text-xs font-mono flex items-center gap-1.5 transition-all flex-shrink-0 cursor-pointer"
-                >
-                  {copiedEmail ? (
-                    <>
-                      <Check size={13} className="text-emerald-400" />
-                      <span className="text-emerald-300 font-semibold">Copied!</span>
-                    </>
-                  ) : (
-                    <span>Copy</span>
-                  )}
-                </button>
-              </div>
-
-              {/* Action Cards */}
-              <div className="space-y-2.5 pt-1">
-                <span className="text-[10px] font-mono tracking-widest uppercase text-slate-400 block px-0.5">
-                  Choose Preferred Mail Method:
-                </span>
-
-                {/* Option 1: Gmail (Web Browser) - Highest reliability */}
-                <a
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=nandhanaks321@gmail.com&su=Inquiry%20%7C%20Cybersecurity%20Portfolio&body=Hello%20Nandhana%2C%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0D%0A%0D%0A"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setShowContactModal(false)}
-                  className="w-full p-3 sm:p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 border border-white/10 hover:border-cyan-400/40 flex items-center justify-between group transition-all shadow-md cursor-pointer"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 flex-shrink-0">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
-                      </svg>
-                    </div>
-                    <div className="text-left">
-                      <div className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors flex items-center gap-2">
-                        <span>Open in Gmail</span>
-                        <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase">Instant Web</span>
-                      </div>
-                      <div className="text-[11px] text-slate-400 font-sans">Opens compose tab directly in your browser</div>
-                    </div>
-                  </div>
-                  <ExternalLink size={14} className="text-slate-400 group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-                </a>
-
-                {/* Option 2: Default System Mail App (Mailto) */}
-                <a
-                  href="mailto:nandhanaks321@gmail.com?subject=Inquiry%20%7C%20Cybersecurity%20Portfolio&body=Hello%20Nandhana%2C%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0D%0A%0D%0A"
-                  onClick={() => setShowContactModal(false)}
-                  className="w-full p-3 sm:p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 flex items-center justify-between group transition-all shadow-md cursor-pointer"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 flex-shrink-0">
-                      <Mail size={16} />
-                    </div>
-                    <div className="text-left">
-                      <div className="text-xs sm:text-sm font-bold text-white group-hover:text-white transition-colors flex items-center gap-2">
-                        <span>Default Mail App</span>
-                        <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-white/10 text-slate-300 border border-white/15 uppercase">App</span>
-                      </div>
-                      <div className="text-[11px] text-slate-400 font-sans">Apple Mail, Windows Mail, Outlook desktop app</div>
-                    </div>
-                  </div>
-                  <ArrowUpRight size={14} className="text-slate-400 group-hover:text-white group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-                </a>
-
-                {/* Option 3: Outlook Web */}
-                <a
-                  href="https://outlook.live.com/mail/0/deeplink/compose?to=nandhanaks321@gmail.com&subject=Inquiry%20%7C%20Cybersecurity%20Portfolio&body=Hello%20Nandhana%2C%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0D%0A%0D%0A"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setShowContactModal(false)}
-                  className="w-full p-3 sm:p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 flex items-center justify-between group transition-all shadow-md cursor-pointer"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 flex-shrink-0">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M22.5 4h-21A1.5 1.5 0 0 0 0 5.5v13A1.5 1.5 0 0 0 1.5 20h21a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 22.5 4zm-.5 3.125-9.458 6.03a1 1 0 0 1-1.084 0L2 7.125V6l10 6.375L22 6v1.125z"/>
-                      </svg>
-                    </div>
-                    <div className="text-left">
-                      <div className="text-xs sm:text-sm font-bold text-white group-hover:text-white transition-colors flex items-center gap-2">
-                        <span>Open in Outlook Web</span>
-                        <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-white/10 text-slate-300 border border-white/15 uppercase">Web</span>
-                      </div>
-                      <div className="text-[11px] text-slate-400 font-sans">Opens compose window on Outlook.com</div>
-                    </div>
-                  </div>
-                  <ExternalLink size={14} className="text-slate-400 group-hover:text-white group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-                </a>
-              </div>
-            </div>
+            {/* Open in Gmail Primary Action */}
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=nandhanaks321@gmail.com&su=Inquiry%20%7C%20Cybersecurity%20Portfolio&body=Hello%20Nandhana%2C%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0D%0A%0D%0A"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setShowContactModal(false)}
+              className="w-full py-3 px-4 rounded-2xl bg-white hover:bg-slate-100 text-black font-display font-bold text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-2 transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:shadow-[0_0_35px_rgba(255,255,255,0.4)] hover:scale-[1.01] active:scale-[0.99] cursor-pointer group"
+            >
+              <span>Open in Gmail</span>
+              <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
           </div>
         </div>
       )}
