@@ -75,11 +75,9 @@ export default function Portfolio() {
   const [skillTab, setSkillTab] = useState<'offensive' | 'defensive'>('offensive');
 
   const handleMailClick = () => {
-    // Attempt system mailto client
-    window.location.href = "mailto:nandhanaks321@gmail.com";
-    // Also copy to clipboard for seamless reliability
+    // Copy to clipboard as seamless reliable backup
     if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText("nandhanaks321@gmail.com");
+      navigator.clipboard.writeText("nandhanaks321@gmail.com").catch(() => {});
       setCopiedEmail(true);
       setTimeout(() => setCopiedEmail(false), 3000);
     }
@@ -252,21 +250,24 @@ export default function Portfolio() {
     {
       id: "veylance",
       title: "VEYLANCE",
+      modalTitle: "VEYLANCE — SOC Investigation & Threat Hunting Platform",
       desc: "Full-Stack SOC Investigation & Simulation Platform.",
       image: "/assets/project 1.jpg",
-      domain: "Defensive Operations / Blue Team",
-      liveLink: "https://your-veylance-link-here.com",
+      domain: "Full-Stack SOC Platform / Cybersecurity / Cloud",
+      liveLink: "https://veylance.vercel.app",
+      githubLink: "https://github.com/Nandhanaks2004/VEYLANCE",
+      apiDocsLink: "https://veylance-production.up.railway.app/docs",
       details: {
-        objective: "To build an end-to-end SOC investigation platform that models the progression of a security incident from telemetry generation to incident closure.",
-        problem: "In conventional environments, SIEM monitoring, detection rules, IOC analysis, and digital forensics are explored in silos. This makes it difficult for analysts to understand the complete investigation lifecycle. VEYLANCE unifies these into one controlled workflow.",
-        overview: "A unified SOC platform modeling the complete attack lifecycle—from raw endpoint and network telemetry ingestion to automated case documentation and closure.",
-        skillsResearcher: "Detection engineering, alert triage, MITRE ATT&CK integration, forensic timeline reconstruction, and incident reporting semantics.",
-        skillsStudent: "Full-stack application architecture, database management, and understanding basic SOC workflows.",
-        audience: "SOC Analysts, Detection Engineers, Blue Teams, and Cybersecurity Students.",
-        futureEnhancements: "Completing production backend integration, adding advanced multi-stage synthetic attack scenarios, and strengthening horizontal WebSocket scaling.",
-        keyLearnings: "Understanding how individual security telemetry becomes an actionable detection signal, and the engineering challenge of maintaining detection integrity without hardcoding alerts.",
-        techStack: "React, TypeScript, Vite, TailwindCSS, Python, FastAPI, PostgreSQL, SQLite, WebSockets",
-        statusBadge: "Architecture & Pipelines Verified"
+        objective: "To build an end-to-end, production-grade SOC platform modeling the full incident lifecycle from synthetic attack telemetry generation to forensic analysis and case closure.",
+        problem: "In conventional environments, SIEM monitoring, detection rules, IOC analysis, and digital forensics are explored in silos. Analysts struggle to understand the complete incident response lifecycle. VEYLANCE unifies real-time attack simulations, alert triage, and timeline forensics into one controlled workflow.",
+        overview: "An isolated multi-tenant SOC investigation platform with runtime attack simulations (SSH Brute Force, Ransomware Kill Chain, Lateral Movement), a rule-based detection engine mapped to the MITRE ATT&CK framework, real-time WebSocket telemetry streaming, and automated forensic timeline reconstruction.",
+        skillsResearcher: "Detection engineering, alert triage, adversary emulation, MITRE ATT&CK mappings (Initial Access, Privilege Escalation, Exfiltration), forensic timeline reconstruction, and IOC correlation.",
+        skillsStudent: "Full-stack application architecture (React 19, TypeScript, Vite, TailwindCSS on Vercel), containerized FastAPI backend (Python 3.12, Docker on Railway), PostgreSQL connection pooling, and JWT authentication with native bcrypt.",
+        audience: "SOC Analysts, Detection Engineers, Blue Teams, and Technical Recruiters.<div class='mt-2.5 p-2.5 rounded-xl bg-white/5 border border-white/10 text-[11px] font-sans space-y-1.5'><div class='font-mono text-cyan-300 font-semibold flex items-center gap-1.5'><span class='w-1.5 h-1.5 rounded-full bg-cyan-400'></span><span>Recruiter & Guest Testing Guide:</span></div><p class='text-slate-300 leading-snug'>Click <strong>Register</strong> with any test email or login using <code class='text-cyan-300 font-mono'>secops_lead@veylance.local</code>.</p><div class='text-[10px] text-slate-400 font-mono pt-1 border-t border-white/5 space-y-0.5 leading-tight'><div>1. <strong>Dashboard:</strong> Posture & alert distribution</div><div>2. <strong>Scenarios:</strong> Trigger Brute Force / Ransomware simulations</div><div>3. <strong>Alert Triage:</strong> Inspect MITRE ATT&CK enriched alerts</div><div>4. <strong>Forensics:</strong> Reconstructed attack timelines & IOC cases</div></div></div>",
+        futureEnhancements: "External SIEM webhook integrations (Splunk & Wazuh event forwarders), custom Sigma rule import, and AI-assisted forensic summarization.",
+        keyLearnings: "Designing asynchronous telemetry ingestion pipelines without blocking worker threads, evaluating rule-based detection without hardcoding alerts, managing WebSocket connection lifecycles, and deploying production full-stack systems across Vercel and Railway.",
+        techStack: "React 19, TypeScript, Vite, TailwindCSS, FastAPI, Python 3.12, PostgreSQL, SQLAlchemy, Docker, Railway, Vercel",
+        statusBadge: "Live Production Platform"
       }
     },
     {
@@ -465,11 +466,11 @@ export default function Portfolio() {
         </nav>
       )}
 
-      {/* Floating Toast Notification on Email Copy */}
+      {/* Floating Toast Notification on Email Action */}
       {copiedEmail && (
         <div className="fixed top-16 md:top-24 left-1/2 -translate-x-1/2 z-[100] max-w-[90vw] px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#050508]/95 border border-emerald-500/40 text-emerald-300 text-[11px] sm:text-xs font-mono shadow-[0_10px_35px_rgba(0,0,0,0.85)] backdrop-blur-xl flex items-center gap-2.5 animate-[fadeIn_0.2s_ease-out]">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping flex-shrink-0"></span>
-          <span className="truncate">Email copied: nandhanaks321@gmail.com</span>
+          <span className="truncate">Opening email client • Copied: nandhanaks321@gmail.com</span>
         </div>
       )}
 
@@ -479,7 +480,7 @@ export default function Portfolio() {
           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent to-white/20 mb-1"></div>
           <a href="https://linkedin.com/in/nandhana-k-s-49b79827b" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all hover:scale-110 shadow-lg" title="LinkedIn Profile"><FaLinkedin size={18} /></a>
           <a href="https://github.com/Nandhanaks2004" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all hover:scale-110 shadow-lg" title="GitHub Profile"><FaGithub size={18} /></a>
-          <button onClick={handleMailClick} className="p-2.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all hover:scale-110 shadow-lg cursor-pointer" title="Email: nandhanaks321@gmail.com (Click to open / copy)"><Mail size={18} /></button>
+          <a href="mailto:nandhanaks321@gmail.com?subject=Inquiry%20%7C%20Cybersecurity%20Portfolio&body=Hello%20Nandhana%2C%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0D%0A%0D%0A" onClick={handleMailClick} className="p-2.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all hover:scale-110 shadow-lg cursor-pointer" title="Email: nandhanaks321@gmail.com (Click to open email client)"><Mail size={18} /></a>
           <div className="w-[1px] h-16 bg-gradient-to-t from-transparent to-white/20 mt-1"></div>
         </div>
       )}
@@ -567,7 +568,7 @@ export default function Portfolio() {
               <span className="text-[10px] font-mono tracking-widest uppercase text-slate-400 mr-1">Connect:</span>
               <a href="https://linkedin.com/in/nandhana-k-s-49b79827b" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all shadow-md" title="LinkedIn Profile"><FaLinkedin size={16} /></a>
               <a href="https://github.com/Nandhanaks2004" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all shadow-md" title="GitHub Profile"><FaGithub size={16} /></a>
-              <button onClick={handleMailClick} className="p-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all shadow-md cursor-pointer" title="Email: nandhanaks321@gmail.com (Click to open / copy)"><Mail size={16} /></button>
+              <a href="mailto:nandhanaks321@gmail.com?subject=Inquiry%20%7C%20Cybersecurity%20Portfolio&body=Hello%20Nandhana%2C%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%3A%0D%0A%0D%0A" onClick={handleMailClick} className="p-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all shadow-md cursor-pointer" title="Email: nandhanaks321@gmail.com (Click to open email client)"><Mail size={16} /></a>
             </div>
           </div>
         )}
@@ -1215,8 +1216,8 @@ const CaseStudyTransition = ({ project, onClose }: { project: any; onClose: () =
                 <span className="text-[10px] md:text-[11px] font-mono tracking-[0.2em] sm:tracking-[0.28em] uppercase text-slate-400 font-medium block mb-1">
                   {project.domain || "Cybersecurity Architecture"}
                 </span>
-                <h2 className="font-display text-lg sm:text-2xl lg:text-3xl font-bold text-white uppercase tracking-wider">
-                  {project.title}
+                <h2 className="font-display text-base sm:text-xl lg:text-2xl font-bold text-white uppercase tracking-wider max-w-3xl text-center leading-snug">
+                  {project.modalTitle || project.title}
                 </h2>
               </div>
               
@@ -1269,7 +1270,7 @@ const CaseStudyTransition = ({ project, onClose }: { project: any; onClose: () =
                       { 
                         color: '#050507', 
                         title: 'Tooling & Verification', 
-                        description: `<div class="space-y-2.5 pt-0.5"><div class="font-mono text-xs text-white leading-relaxed flex flex-wrap gap-1.5">${project.details.techStack.split(', ').map((t: string) => `<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[11px]">${t}</span>`).join('')}</div><div class="text-[11px] text-slate-400 font-mono leading-relaxed"><span class="text-white/80 font-medium">Roadmap:</span> ${project.details.futureEnhancements}</div>${project.liveLink && !project.liveLink.includes('your-veylance-link') ? `<a href="${project.liveLink}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl flex items-center justify-center text-white transition-all gap-2 group shadow-lg mt-1.5"><span class="uppercase tracking-widest text-xs font-bold">Launch Live App</span><svg class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>` : `<div class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs text-white font-mono mt-1"><span class="truncate">${project.details.statusBadge || "Verified Architecture"}</span><span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span></div>`}</div>`, 
+                        description: `<div class="space-y-2.5 pt-0.5"><div class="font-mono text-xs text-white leading-relaxed flex flex-wrap gap-1.5">${project.details.techStack.split(', ').map((t: string) => `<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[11px]">${t}</span>`).join('')}</div><div class="text-[11px] text-slate-400 font-mono leading-relaxed"><span class="text-white/80 font-medium">Roadmap:</span> ${project.details.futureEnhancements}</div>${(project.liveLink || project.githubLink || project.apiDocsLink) ? `<div class="flex flex-wrap gap-2 pt-1 mt-1">${project.liveLink && !project.liveLink.includes('your-veylance-link') ? `<a href="${project.liveLink}" target="_blank" rel="noopener noreferrer" class="flex-1 min-w-[110px] px-3 py-2 bg-white/15 hover:bg-white/25 border border-white/25 rounded-xl flex items-center justify-center text-white transition-all gap-1.5 group shadow-lg text-[11px] font-bold uppercase tracking-wider"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span><span>Live Demo</span><svg class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>` : ''}${project.githubLink ? `<a href="${project.githubLink}" target="_blank" rel="noopener noreferrer" class="flex-1 min-w-[110px] px-3 py-2 bg-white/5 hover:bg-white/15 border border-white/15 rounded-xl flex items-center justify-center text-slate-200 hover:text-white transition-all gap-1.5 group shadow-md text-[11px] font-bold uppercase tracking-wider"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg><span>GitHub Code</span></a>` : ''}${project.apiDocsLink ? `<a href="${project.apiDocsLink}" target="_blank" rel="noopener noreferrer" class="flex-1 min-w-[110px] px-3 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/30 rounded-xl flex items-center justify-center text-cyan-300 hover:text-cyan-200 transition-all gap-1.5 group shadow-md text-[11px] font-bold uppercase tracking-wider"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><span>API Docs</span></a>` : ''}</div>` : `<div class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs text-white font-mono mt-1"><span class="truncate">${project.details.statusBadge || "Verified Architecture"}</span><span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span></div>`}</div>`, 
                         label: 'Stack & Roadmap' 
                       }
                     ]}
